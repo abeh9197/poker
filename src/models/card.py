@@ -11,6 +11,7 @@ class CardValue(Enum):
     """
     Card values.
     """
+
     ACE_PIKES = {"id_": 0, "view": "♠A", "suit": "PIKES", "number": 1}
     TWO_PIKES = {"id_": 1, "view": "♠2", "suit": "PIKES", "number": 2}
     THREE_PIKES = {"id_": 2, "view": "♠3", "suit": "PIKES", "number": 3}
@@ -63,7 +64,7 @@ class CardValue(Enum):
     JACK_CLOVERS = {"id_": 49, "view": "♣11", "suit": "CLOVERS", "number": 11}
     QUEEN_CLOVERS = {"id_": 50, "view": "♣12", "suit": "CLOVERS", "number": 12}
     KING_CLOVERS = {"id_": 51, "view": "♣13", "suit": "CLOVERS", "number": 13}
-    
+
     @staticmethod
     def from_number(number: int) -> CardValue:
         """
@@ -72,11 +73,13 @@ class CardValue(Enum):
         for cv in CardValue:
             if cv.value["id_"] == number:
                 return cv
-            
+
+
 class Card:
     """
     Card
     """
+
     def __init__(self, value: CardValue) -> None:
         self.value = value
 
@@ -87,10 +90,24 @@ class Card:
         return str(self)
 
     def __hash__(self) -> int:
-        return int(self.value.value["num"])
+        return int(self.value.value["number"])
 
     def __eq__(self, other: Card) -> bool:
         return self.value == other.value
+
+    @property
+    def number(self) -> int:
+        """
+        Return CardValue["number"]
+        """
+        return self.value.value["number"]
+
+    @property
+    def suit(self) -> int:
+        """
+        Return CardValue["suit"]
+        """
+        return self.value.value["suit"]
 
     @staticmethod
     def from_number(number: int) -> Card:

@@ -7,10 +7,12 @@ from typing import List
 from .card import Card
 from .deck import Deck
 
+
 class Game:
     """
     Managing games.
     """
+
     def __init__(self, deck: Deck) -> None:
         self.deck = deck
 
@@ -21,4 +23,3 @@ class Game:
         hand = self.deck[:5]
         self.deck = self.deck[5:]
         return hand
-        

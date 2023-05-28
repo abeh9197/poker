@@ -12,6 +12,7 @@ class Deck:
     """
     Deck
     """
+
     def __init__(self) -> None:
         self.__value = self.__initialize()
         self.value = self.__value
@@ -27,7 +28,7 @@ class Deck:
 
     def __delitem__(self, key):
         del self.value[key]
-    
+
     def __len__(self) -> str:
         return len(self.value)
 
@@ -37,7 +38,7 @@ class Deck:
         Return List which have 52 Card class object.
         """
         return [Card.from_number(number) for number in range(52)]
-    
+
     def shuffle(self) -> None:
         """
         Shuffle own value.
