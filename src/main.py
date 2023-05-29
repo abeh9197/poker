@@ -23,12 +23,8 @@ def main() -> None:
         cards = game.deal()
         player = Player(cards=cards)
         player.hand = sorted(player.hand, key=lambda x: x.number)
-        print(player.hand)
-        if validator.is_royal_straight_flash(player.hand):
-            break
-        elif validator.is_straight_flash(player.hand):
-            break
-        elif validator.is_four_card(player.hand):
+        logger.info(player.hand)
+        if validator.judge_hand(hand=player.hand):
             break
 
 

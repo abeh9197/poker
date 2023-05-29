@@ -17,6 +17,22 @@ class Validation:
     def __init__(self) -> None:
         pass
 
+    def judge_hand(self, hand: List[Card]) -> None:
+        """
+        Judge hand.
+        """
+        if any(
+            [
+                self._is_royal_straight_flash(hand=hand),
+                self._is_straight_flash(hand=hand),
+                self._is_four_card(hand=hand),
+                self._is_straight(hand=hand),
+            ]
+        ):
+            return True
+        else:
+            False
+
     def __all_different_number(self, hand: List[Card]) -> bool:
         """
         Validate all card number is different.
@@ -51,7 +67,7 @@ class Validation:
             ]
         )
 
-    def is_royal_straight_flash(self, hand: List[Card]) -> bool:
+    def _is_royal_straight_flash(self, hand: List[Card]) -> bool:
         """
         Validate hand is whether Royal Straight Flash.
         """
@@ -66,7 +82,7 @@ class Validation:
         else:
             return False
 
-    def is_straight_flash(self, hand: List[Card]) -> bool:
+    def _is_straight_flash(self, hand: List[Card]) -> bool:
         """
         Validate hand is whether Straight Flash.
         """
@@ -80,7 +96,7 @@ class Validation:
         else:
             return False
 
-    def is_four_card(self, hand: List[Card]) -> bool:
+    def _is_four_card(self, hand: List[Card]) -> bool:
         """
         Validate hand is four card.
         """
@@ -88,6 +104,19 @@ class Validation:
         keys = list(counted.keys())
         if counted[keys[0]] == 4 or counted[keys[1]] == 4:
             logger.info("[HAND] FOUR CARD")
+            return True
+        else:
+            return False
+
+    def _is_straight(self, hand: List[Card]) -> bool:
+        """
+        Validate hand is straight.
+        """
+        if (
+            abs(hand[0].number - hand[-1].number) == 4
+            and self.__all_different_number(hand=hand)
+        ):
+            logger.info("[HAND] STRAIGHT")
             return True
         else:
             return False
